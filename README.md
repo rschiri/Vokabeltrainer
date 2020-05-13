@@ -1,0 +1,2 @@
+# Vokabeltrainer
+Unser Programmierpraktikum Repository
