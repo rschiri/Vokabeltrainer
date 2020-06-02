@@ -27,15 +27,20 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    addvoc.cpp
+    addvoc.cpp \
+    woerterbuch.cpp \
+    databaseconnection.cpp
 
 HEADERS += \
         mainwindow.h \
-    addvoc.h
+    addvoc.h \
+    woerterbuch.h \
+    databaseconnection.h
 
 FORMS += \
         mainwindow.ui \
-    addvoc.ui
+    addvoc.ui \
+    woerterbuch.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

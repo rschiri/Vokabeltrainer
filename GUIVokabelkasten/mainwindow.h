@@ -26,6 +26,8 @@ private slots:
     
     void on_actionKategorie_triggered();
 
+    void on_actionOpen_triggered();
+
 private:
 
     //Über das Objekt ui kann man dann später auf die ganzen Widgets in dem MainWindow zugreifen

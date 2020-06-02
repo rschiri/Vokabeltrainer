@@ -305,6 +305,7 @@
     <property name="title">
      <string>Wörterbuch</string>
     </property>
+    <addaction name="actionOpen"/>
    </widget>
    <widget class="QMenu" name="menuStatistiken">
     <property name="title">
@@ -349,6 +350,11 @@
   <action name="actionNeuer_Karteikasten">
    <property name="text">
     <string>Neuer Karteikasten</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
    </property>
   </action>
  </widget>

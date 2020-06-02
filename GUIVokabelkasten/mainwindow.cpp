@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "addvoc.h"
+#include "woerterbuch.h"
 #include <QApplication>
 #include <QToolBar>
 #include <QInputDialog>
@@ -74,4 +75,13 @@ void MainWindow::on_actionKategorie_triggered()
 
 
     }
+}
+
+
+
+void MainWindow::on_actionOpen_triggered()
+{
+    Woerterbuch wobuch;
+    wobuch.setModal(true);
+    wobuch.exec();
 }
