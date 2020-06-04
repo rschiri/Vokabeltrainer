@@ -2,17 +2,19 @@
 #define DATABASECONNECTION_H
 
 #include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
 
 class DatabaseConnection
 {
 public:
     DatabaseConnection();
-
-    void connClose();
-
-    bool connOpen();
-
-    QSqlDatabase mydb;
+    QSqlDatabase db;
+    void openConnection();
+    void createTableFromData();
+    void queryDataAndPrintData();
+    void queryFalseUsedDataAndPrintData();
+    void queryInsertDataAndPrintData();
+    void closeConnection();
 
 
 };
