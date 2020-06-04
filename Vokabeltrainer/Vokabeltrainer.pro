@@ -29,13 +29,19 @@ SOURCES += \
         mainwindow.cpp \
     addvoc.cpp \
     woerterbuch.cpp \
-    databaseconnection.cpp
+    databaseconnection.cpp \
+    mytablemodel.cpp \
+    mytablemodel.cpp \
+    mytablemodel.cpp
 
 HEADERS += \
         mainwindow.h \
     addvoc.h \
     woerterbuch.h \
-    databaseconnection.h
+    databaseconnection.h \
+    mytablemodel.h \
+    mytablemodel.h \
+    mytablemodel.h
 
 FORMS += \
         mainwindow.ui \
