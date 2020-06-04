@@ -20,3 +20,4 @@ bool DatabaseConnection::openConnection() {
     qDebug()<<"Database connection established: "<<success;
     qDebug() << db.lastError().text();
 }
+
