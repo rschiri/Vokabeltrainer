@@ -18,6 +18,6 @@ bool DatabaseConnection::openConnection() {
     db.setPassword("Postgres123.");
     bool success = db.open();
     qDebug()<<"Database connection established: "<<success;
-    qDebug() << db.lastError().text();
+
 }
 
