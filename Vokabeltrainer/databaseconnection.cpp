@@ -1,6 +1,8 @@
-#include "databaseconnection.h"
-#include <QtSql/QSqlDatabase>
-#include <QMessageBox>
+#include "sqlconnector.h"
+#include <QFile>
+#include <QDebug>
+#include <QTextStream>
+#include <QSqlError>
 
 DatabaseConnection::DatabaseConnection()
 {
@@ -8,14 +10,13 @@ DatabaseConnection::DatabaseConnection()
 }
 
 
-bool DatabaseConnection::connOpen(){
-    mydb = QSqlDatabase::addDatabase("QString:: .......");
-    mydb.setDatabaseName("QString::....");
-    
-
-    if(!mydb.open()){
-        QMessageBox::critical(this,"Warnung", "Fehler bei Verbindung zur Datenbank!");
-    }else{
-        QMessageBox::information(this, "Verbindung", "Verbunden!");
-    }
+bool DatabaseConnection::openConnection() {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
+    db.setHostName("192.168.180.1");
+    db.setDatabaseName("postgres");
+    db.setUserName("postgres");
+    db.setPassword("Postgres123.");
+    bool success = db.open();
+    qDebug()<<"Database connection established: "<<success;
+    qDebug() << db.lastError().text();
 }
