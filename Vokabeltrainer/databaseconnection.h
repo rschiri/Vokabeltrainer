@@ -10,10 +10,6 @@ public:
     DatabaseConnection();
     QSqlDatabase db;
     void openConnection();
-    void createTableFromData();
-    void queryDataAndPrintData();
-    void queryFalseUsedDataAndPrintData();
-    void queryInsertDataAndPrintData();
     void closeConnection();
 
 
