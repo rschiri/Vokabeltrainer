@@ -35,17 +35,17 @@ void Woerterbuch::on_Button_LoadDatabase_clicked()
     DatabaseConnection conn;
     QSqlQueryModel *model = new QSqlQueryModel();
 
-    conn.connOpen();
-    QSqlQuery* qry = new QSqlQuery(conn.mydb);
+    conn.openConnection();
+    QSqlQuery* qry = new QSqlQuery(conn.db);
 
-    qry->prepare("select * from vocabel");
+    qry->prepare("select * from category");
 
     qry->exec();
 
     model->setQuery(*qry);
     ui->tableView->setModel(model);
 
-    conn.connClose();
+    //conn.connClose();
     qDebug() << (model->rowCount());
 
 

@@ -32,7 +32,7 @@ SOURCES += \
     addvocable.cpp \
     woerterbuch.cpp \
     databaseconnection.cpp \
-    mytablemodel.cpp \
+    mytablemodel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +40,7 @@ HEADERS += \
     addvocable.h \
     woerterbuch.h \
     databaseconnection.h \
-    mytablemodel.h \
+    mytablemodel.h
 
 FORMS += \
         mainwindow.ui \

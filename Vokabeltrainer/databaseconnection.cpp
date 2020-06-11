@@ -1,4 +1,4 @@
-#include "sqlconnector.h"
+#include "databaseconnection.h"
 #include <QFile>
 #include <QDebug>
 #include <QTextStream>
@@ -10,7 +10,7 @@ DatabaseConnection::DatabaseConnection()
 }
 
 
-bool DatabaseConnection::openConnection() {
+void DatabaseConnection::openConnection() {
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
     db.setHostName("192.168.180.1");
     db.setDatabaseName("postgres");

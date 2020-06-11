@@ -2,12 +2,12 @@
 #define ADDVOCABLE_H
 
 #include <QWidget>
-
+#include <QDialog>
 namespace Ui {
 class addVocable;
 }
 
-class addVocable : public QWidget
+class addVocable : public QDialog
 {
     Q_OBJECT
 

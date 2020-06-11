@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "addvoc.h"
+#include "addvocable.h"
 #include "woerterbuch.h"
 #include <QApplication>
 #include <QToolBar>
@@ -56,7 +56,7 @@ void MainWindow::on_ButtonAuswahl_clicked()
 
 void MainWindow::on_Neu_Button_clicked()
 {
-    AddVoc addVoc;
+    addVocable addVoc;
     addVoc.setModal(true);
     addVoc.exec();
 }
