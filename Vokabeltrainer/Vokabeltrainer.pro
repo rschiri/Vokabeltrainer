@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,24 +29,23 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     addvoc.cpp \
+    addvocable.cpp \
     woerterbuch.cpp \
     databaseconnection.cpp \
     mytablemodel.cpp \
-    mytablemodel.cpp \
-    mytablemodel.cpp
 
 HEADERS += \
         mainwindow.h \
     addvoc.h \
+    addvocable.h \
     woerterbuch.h \
     databaseconnection.h \
     mytablemodel.h \
-    mytablemodel.h \
-    mytablemodel.h
 
 FORMS += \
         mainwindow.ui \
     addvoc.ui \
+    addvocable.ui \
     woerterbuch.ui
 
 # Default rules for deployment.
