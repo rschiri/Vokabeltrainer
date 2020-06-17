@@ -28,7 +28,6 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    addvoc.cpp \
     addvocable.cpp \
     woerterbuch.cpp \
     databaseconnection.cpp \
@@ -36,7 +35,6 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.h \
-    addvoc.h \
     addvocable.h \
     woerterbuch.h \
     databaseconnection.h \
@@ -44,7 +42,6 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui \
-    addvoc.ui \
     addvocable.ui \
     woerterbuch.ui
 
