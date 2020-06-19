@@ -9,7 +9,7 @@ class DatabaseConnection
 public:
     DatabaseConnection();
     QSqlDatabase db;
-    void openConnection();
+    bool openConnection();
     void closeConnection();
 
 
