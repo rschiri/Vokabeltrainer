@@ -15,6 +15,7 @@ class Woerterbuch : public QDialog
 
 public:
     void slotOpenDataFile();
+    void showVocables();
     explicit Woerterbuch(QWidget *parent = nullptr);
     ~Woerterbuch();
 

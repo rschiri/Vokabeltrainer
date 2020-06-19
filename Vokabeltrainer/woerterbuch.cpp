@@ -10,16 +10,39 @@
 #include <QDebug>
 
 
+void Woerterbuch::showVocables(){
+    DatabaseConnection conn;
+
+    if(conn.openConnection()){
+
+            QSqlQueryModel *model = new QSqlQueryModel();
+            QSqlQuery query("select w1.word as wordid1, w2.word as wordid2, box from vocable as v left join word as w1 on v.wordid1=w1.wordid left join word as w2 on v.wordid2=w2.wordid", conn.db);
+
+            model->setQuery(query);
+            ui->tableView->setModel(model);
+            ui->tableView->resizeColumnsToContents();
+
+        } else if (!conn.openConnection()){
+
+            QMessageBox msgbox;
+            msgbox.setText("Verbindung zur Datenbank konnte nicht hergestellt werden");
+            msgbox.exec();
+
+        }
+
+        conn.closeConnection();
+}
+
+
 Woerterbuch::Woerterbuch(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Woerterbuch)
 {
     ui->setupUi(this);
-
-
-
+    showVocables();
 
 }
+
 
 Woerterbuch::~Woerterbuch()
 {
@@ -33,23 +56,24 @@ Woerterbuch::~Woerterbuch()
 void Woerterbuch::on_Button_LoadDatabase_clicked()
 {
     DatabaseConnection conn;
-    QSqlQueryModel *model = new QSqlQueryModel();
 
-    conn.openConnection();
-    QSqlQuery* qry = new QSqlQuery(conn.db);
+        conn.openConnection();
 
-    qry->prepare("select * from category");
+        if(conn.openConnection()){
 
-    qry->exec();
+            QSqlQueryModel *model = new QSqlQueryModel();
+            QSqlQuery query("select * from word");
 
-    model->setQuery(*qry);
-    ui->tableView->setModel(model);
+            model->setQuery(query);
+            ui->tableView->setModel(model);
+            ui->tableView->resizeColumnsToContents();
+            
+        }else{
 
-    //conn.connClose();
-    qDebug() << (model->rowCount());
+            QMessageBox msgbox;
+            msgbox.setText("Verbindung zur Datenbank konnte nicht hergestellt werden");
+            msgbox.exec();
+        }
 
-
-
-
-
+        conn.closeConnection();
 }
