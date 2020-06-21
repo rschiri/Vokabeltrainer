@@ -1,0 +1,45 @@
+/* PostgreSQL - Version gxinyqm10e8pmu0i.myfritz.net*/
+/*Christin Meichsner */
+
+
+drop table if exists wordtype cascade;
+drop table if exists languages cascade;
+drop table if exists category cascade;
+drop table if exists word cascade;
+drop table if exists vocable cascade;
+
+
+create table wordtype(
+	wordtypeid serial primary key,
+	wordtype char(30)
+);
+
+create table languages(
+	languagesid serial primary key,
+	language char(30)
+);
+
+create table category (
+	categoryid serial primary key,
+	category char(30)
+);
+
+create table word(
+	wordid serial primary key,
+	wordtypeid INTEGER REFERENCES wordtype (wordtypeid) ON DELETE CASCADE,
+	languageid INTEGER REFERENCES languages (languagesid) ON DELETE CASCADE,
+	word text[3]
+);
+
+
+create table vocable(
+	wordid1 INTEGER REFERENCES word (wordid) ON DELETE CASCADE,
+	wordid2 INTEGER REFERENCES word (wordid) ON DELETE CASCADE,
+	primary key(wordid1, wordid2),
+	box INTEGER CHECK (box BETWEEN 1 AND 5 ) DEFAULT 1,
+	counter INTEGER CHECK (counter BETWEEN 0 AND 2) DEFAULT 0,
+	categoryid INTEGER REFERENCES category (categoryid) ON DELETE CASCADE,
+	used INTEGER DEFAULT 0,
+	usedright INTEGER DEFAULT 0
+	
+);

@@ -38,7 +38,7 @@
      <string>1. Bedeutung</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="deutschBedeutung1lineEdit">
+   <widget class="QLineEdit" name="deutschBedeutung1LineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -61,7 +61,7 @@
      <string>2. Bedeutung</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="deutschBedeutung2lineEdit">
+   <widget class="QLineEdit" name="deutschBedeutung2LineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -84,7 +84,7 @@
      <string>3. Bedeutung</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="deutschBedeutung3lineEdit">
+   <widget class="QLineEdit" name="deutschBedeutung3LineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -156,7 +156,7 @@
      <string>1. Bedeutung</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_5">
+   <widget class="QLineEdit" name="spracheBedeutung1LineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -179,7 +179,7 @@
      <string>2. Bedeutung</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_6">
+   <widget class="QLineEdit" name="spracheBedeutung2LineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -248,7 +248,7 @@
      <string>3. Bedeutung</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_7">
+   <widget class="QLineEdit" name="spracheBedeutung3LineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -282,7 +282,7 @@
     <string>Hinzufügen</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="abbrechenButton_2">
+  <widget class="QPushButton" name="resetButton">
    <property name="geometry">
     <rect>
      <x>310</x>
@@ -292,7 +292,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Abbrechen</string>
+    <string>Reset</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_11">
