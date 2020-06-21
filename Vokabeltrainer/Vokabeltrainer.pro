@@ -31,14 +31,16 @@ SOURCES += \
     addvocable.cpp \
     woerterbuch.cpp \
     databaseconnection.cpp \
-    mytablemodel.cpp
+    mytablemodel.cpp \
+    databasequery.cpp
 
 HEADERS += \
         mainwindow.h \
     addvocable.h \
     woerterbuch.h \
     databaseconnection.h \
-    mytablemodel.h
+    mytablemodel.h \
+    databasequery.h
 
 FORMS += \
         mainwindow.ui \
