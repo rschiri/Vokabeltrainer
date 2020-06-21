@@ -1,0 +1,46 @@
+/* PostgreSQL - Version gxinyqm10e8pmu0i.myfritz.net*/
+/*Christin Meichsner */
+/*truncate*/
+
+INSERT INTO wordtype (wordtype) VALUES ('n/a');
+INSERT INTO wordtype (wordtype) VALUES ('Adjektiv');
+INSERT INTO wordtype (wordtype) VALUES ('Adverb');
+INSERT INTO wordtype (wordtype) VALUES ('Artikel');
+INSERT INTO wordtype (wordtype) VALUES ('Eigenname');
+INSERT INTO wordtype (wordtype) VALUES ('Konunktion');
+INSERT INTO wordtype (wordtype) VALUES ('Partikel');
+INSERT INTO wordtype (wordtype) VALUES ('Präposition');
+INSERT INTO wordtype (wordtype) VALUES ('Pronomen');
+INSERT INTO wordtype (wordtype) VALUES ('Verb');
+INSERT INTO wordtype (wordtype) VALUES ('unregelmaeßiges Verb');
+INSERT INTO wordtype (wordtype) VALUES ('Substantiv');
+INSERT INTO wordtype (wordtype) VALUES ('Substantiv, feminin');
+INSERT INTO wordtype (wordtype) VALUES ('Substantiv, maskulin');
+INSERT INTO wordtype (wordtype) VALUES ('Substantiv, neutrum');
+INSERT INTO wordtype (wordtype) VALUES ('Zahlenwort');
+
+INSERT INTO languages (language) VALUES ('Deutsch');
+INSERT INTO languages (language) VALUES ('Englisch');
+INSERT INTO languages (language) VALUES ('Spanisch');
+
+INSERT INTO category (category) VALUES ('n/a');
+INSERT INTO category (category) VALUES ('Lesson 1');
+INSERT INTO category (category) VALUES ('Lesson 2');
+INSERT INTO category (category) VALUES ('Lesson 3');
+return qry->exec("select categoryid from category where category = '"+ language +"' ");
+}
+
+INSERT INTO word (wordtypeid,languageid,word) VALUES (3,1,'{"vielleicht","womöglich","eventuell"}');
+INSERT INTO word (wordtypeid,languageid,word) VALUES (13,1,'{"Note", "Schulnote"}');
+INSERT INTO word (wordtypeid,languageid,word) VALUES (13,1,'{"Note", "Musiknote"}');
+INSERT INTO word (wordtypeid,languageid,word) VALUES (10,1,'{spielen}');
+INSERT INTO word (wordtypeid,languageid,word) VALUES (10,2,'{"play"}');
+INSERT INTO word (wordtypeid,languageid,word) VALUES (3,2,'{"perhaps","maybe","possibly"}');
+INSERT INTO word (wordtypeid,languageid,word) VALUES (3,3,'{"quizás","tal vez"}');
+INSERT INTO word (wordtypeid,languageid,word) VALUES (3,3,'{"jugar","jugar (algo)"}');
+
+INSERT INTO vocable (wordid1,wordid2,categoryid) VALUES (1,6,1);
+INSERT INTO vocable (wordid1,wordid2,categoryid) VALUES (1,7,1);
+INSERT INTO vocable (wordid1,wordid2,categoryid) VALUES (4,5,1);
+INSERT INTO vocable (wordid1,wordid2,categoryid) VALUES (4,8,1);
+
