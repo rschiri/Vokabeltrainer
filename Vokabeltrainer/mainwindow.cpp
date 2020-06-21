@@ -56,7 +56,7 @@ void MainWindow::on_ButtonAuswahl_clicked()
 
 void MainWindow::on_Neu_Button_clicked()
 {
-    addVocable addVoc;
+    AddVocable addVoc;
     addVoc.setModal(true);
     addVoc.exec();
 }
