@@ -80,20 +80,25 @@ QStringList Databasequery::getAllLanguagesExcept(QString qstring){
     return qStringList;
 }
 
-
 int Databasequery::getIDCategory(DatabaseConnection &dbc,QString category){
     QSqlQuery *qry = new QSqlQuery(dbc.db);
-    return qry->exec("select categoryid from category where category = '"+ category +"' ");
+    qry->exec("select categoryid from category where category = '"+ category +"' ");
+    qry->next();
+    return qry->value(0).toInt();
 }
 
 int Databasequery::getIDWordtype(DatabaseConnection &dbc,QString wordtype){
     QSqlQuery *qry = new QSqlQuery(dbc.db);
-    return qry->exec("select categoryid from category where category = '"+ wordtype +"' ");
+    qry->exec("select wordtypeid from wordtype where wordtype = '"+ wordtype +"' ");
+    qry->next();
+    return qry->value(0).toInt();
 }
 
 int Databasequery::getIDLanguage(DatabaseConnection &dbc,QString language){
     QSqlQuery *qry = new QSqlQuery(dbc.db);
-    return qry->exec("select categoryid from category where category = '"+ language +"' ");
+    qry->exec("select languagesid from languages where language = '"+ language +"' ");
+    qry->next();
+    return qry->value(0).toInt();
 }
 
 int Databasequery::addWord(QString statement,QString wordtype,QString language){
