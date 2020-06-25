@@ -11,17 +11,17 @@ drop table if exists vocable cascade;
 
 create table wordtype(
 	wordtypeid serial primary key,
-	wordtype char(30)
+	wordtype text
 );
 
 create table languages(
 	languagesid serial primary key,
-	language char(30)
+	language text
 );
 
 create table category (
 	categoryid serial primary key,
-	category char(30)
+	category text
 );
 
 create table word(

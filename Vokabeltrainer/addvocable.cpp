@@ -3,7 +3,6 @@
 
 #include <QTextStream>
 #include <QMessageBox>
-#include <QDebug>
 #include <QSqlError>
 
 #include <databasequery.h>
@@ -15,9 +14,17 @@ AddVocable::AddVocable(QWidget *parent) :
     ui->setupUi(this);
     Databasequery dbq;
     ui->deutschWortartComboBox->addItems(dbq.getAllWordtypes());
+    ui->deutschWortartComboBox->adjustSize();
+    ui->deutschWortartComboBox->setStyleSheet("combobox-popup:0;");
     ui->spracheWortartComboBox->addItems(dbq.getAllWordtypes());
+    ui->spracheWortartComboBox->adjustSize();
+    ui->spracheWortartComboBox->setStyleSheet("combobox-popup:0;");
     ui->spracheComboBox->addItems(dbq.getAllLanguagesExcept("Deutsch"));
+    ui->spracheComboBox->adjustSize();
+    ui->spracheComboBox->setStyleSheet("combobox-popup:0;");
     ui->kategorieComboBox->addItems(dbq.getAllCategories());
+    ui->kategorieComboBox->adjustSize();
+    ui->kategorieComboBox->setStyleSheet("combobox-popup:0;");
 
 }
 
@@ -48,11 +55,14 @@ void AddVocable::on_hinzufuegenButton_clicked()
     if(!stringLanguageWords.isEmpty()){
         wordid2 = dbq.addWord(stringLanguageWords,ui->spracheWortartComboBox->currentText(),ui->spracheComboBox->currentText());
     }
-
-    if(wordid1 > 0 || wordid2 > 0){
+    QMessageBox msgbox;
+    if(wordid1 > 0 && wordid2 > 0){
         dbq.addVocable(wordid1,wordid2,ui->kategorieComboBox->currentText());
         QMessageBox msgbox;
         msgbox.setText("Vocable wurde hinzugefügt");
+        msgbox.exec();
+    }else{
+        msgbox.setText("Es muss ein Wort in die erste Bedeutung von Deutsch und der Fremdsprache geschrieben werden");
         msgbox.exec();
     }
 

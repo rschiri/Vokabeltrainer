@@ -2,6 +2,7 @@
 #include "databaseconnection.h"
 
 #include <QTextStream>
+#include <QDebug>
 
 Databasequery::Databasequery()
 {
@@ -100,6 +101,69 @@ int Databasequery::getIDLanguage(DatabaseConnection &dbc,QString language){
     qry->next();
     return qry->value(0).toInt();
 }
+bool Databasequery::checkCategory(QString category){
+    DatabaseConnection dbc;
+    dbc.openConnection();
+    QSqlQuery *qry = new QSqlQuery(dbc.db);
+    qry->exec("select count (category) from category where category = '"+ category +"';");
+    dbc.closeConnection();
+    qry->next();
+    if (qry->value(0).toInt() > 0)
+        return true;
+    else{
+        return false;
+    }
+}
+bool Databasequery::checkWordtype(QString wordtype){
+    DatabaseConnection dbc;
+    dbc.openConnection();
+    QSqlQuery *qry = new QSqlQuery(dbc.db);
+    qry->exec("select count (wordtype) from wordtype where worstype = '"+ wordtype +"';");
+    dbc.closeConnection();
+    qry->next();
+    if (qry->value(0).toInt() > 0)
+        return true;
+    else{
+        return false;
+    }
+}
+bool Databasequery::checkLanguage(QString language){
+    DatabaseConnection dbc;
+    dbc.openConnection();
+    QSqlQuery *qry = new QSqlQuery(dbc.db);
+    qry->exec("select count (language) from languages where language = '"+ language +"';");
+    dbc.closeConnection();
+    qry->next();
+    if (qry->value(0).toInt() > 0)
+        return true;
+    else{
+        return false;
+    }
+}
+
+void Databasequery::addCategory(QString category){
+    DatabaseConnection dbc;
+    dbc.openConnection();
+    QSqlQuery *qry = new QSqlQuery(dbc.db);
+    qry->exec("INSERT INTO category (category) VALUES ('"+category+"');");
+    dbc.closeConnection();
+}
+
+void Databasequery::addWordtype(QString wordtype){
+    DatabaseConnection dbc;
+    dbc.openConnection();
+    QSqlQuery *qry = new QSqlQuery(dbc.db);
+    qry->exec("INSERT INTO wordtype (wordtype) VALUES ('"+wordtype+"');");
+    dbc.closeConnection();
+}
+
+void Databasequery::addLanguage(QString language){
+    DatabaseConnection dbc;
+    dbc.openConnection();
+    QSqlQuery *qry = new QSqlQuery(dbc.db);
+    qry->exec("INSERT INTO languages (language) VALUES ('"+ language +"');");
+    dbc.closeConnection();
+}
 
 int Databasequery::addWord(QString statement,QString wordtype,QString language){
     DatabaseConnection dbc;
@@ -111,13 +175,15 @@ int Databasequery::addWord(QString statement,QString wordtype,QString language){
                  "VALUES (:wordtypeid, :languageid, '{ "+ statement + " }') returning wordid");
     qry->bindValue(":wordtypeid", getIDWordtype(dbc,wordtype));
     qry->bindValue(":languageid", getIDLanguage(dbc,language));
-    wordid = qry->exec();
+    qry->exec();
+    qry->next();
+    wordid = qry->value(0).toInt();
 
     dbc.closeConnection();
     return wordid;
 }
 
-void Databasequery::addVocable(int wordid1, int wordid2, QString category){
+void Databasequery::addVocable(int &wordid1, int &wordid2, QString category){
     DatabaseConnection dbc;
     dbc.openConnection();
     QSqlQuery *qry = new QSqlQuery(dbc.db);
