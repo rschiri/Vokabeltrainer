@@ -2,6 +2,7 @@
 #include "databaseconnection.h"
 
 #include <QTextStream>
+#include <QDebug>
 
 Databasequery::Databasequery()
 {
