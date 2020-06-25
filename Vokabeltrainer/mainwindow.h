@@ -15,12 +15,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
 private slots:
-
-
-    void on_ButtonAlle_clicked();
-
-    void on_ButtonAuswahl_clicked();
 
     void on_Neu_Button_clicked();
     
@@ -28,11 +24,21 @@ private slots:
 
     void on_actionOpen_triggered();
 
+    void on_buttonTestVocabulary_clicked();
+
+    void on_vocableOption1_clicked();
+
+    void on_vocableOption2_clicked();
+
+    void on_vocableOption3_clicked();
+
+    int getChosenVocableOption();
+
 private:
 
     //Über das Objekt ui kann man dann später auf die ganzen Widgets in dem MainWindow zugreifen
     Ui::MainWindow *ui;
-
+    int rightOption;
     void close();
 
 };
