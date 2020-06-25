@@ -30,7 +30,7 @@ public:
     void addLanguage(QString language);
 
     int addWord(QString statement,QString wordtype,QString language);
-    void addVocable(int wordid1,int wordid2, QString category);
+    void addVocable(int &wordid1,int &wordid2, QString category);
 
 };
 

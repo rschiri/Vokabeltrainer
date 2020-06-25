@@ -3,7 +3,6 @@
 
 #include <QTextStream>
 #include <QMessageBox>
-#include <QDebug>
 #include <QSqlError>
 
 #include <databasequery.h>

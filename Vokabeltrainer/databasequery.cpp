@@ -175,13 +175,15 @@ int Databasequery::addWord(QString statement,QString wordtype,QString language){
                  "VALUES (:wordtypeid, :languageid, '{ "+ statement + " }') returning wordid");
     qry->bindValue(":wordtypeid", getIDWordtype(dbc,wordtype));
     qry->bindValue(":languageid", getIDLanguage(dbc,language));
-    wordid = qry->exec();
+    qry->exec();
+    qry->next();
+    wordid = qry->value(0).toInt();
 
     dbc.closeConnection();
     return wordid;
 }
 
-void Databasequery::addVocable(int wordid1, int wordid2, QString category){
+void Databasequery::addVocable(int &wordid1, int &wordid2, QString category){
     DatabaseConnection dbc;
     dbc.openConnection();
     QSqlQuery *qry = new QSqlQuery(dbc.db);
