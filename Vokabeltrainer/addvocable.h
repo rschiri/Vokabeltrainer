@@ -7,16 +7,18 @@ namespace Ui {
 class addVocable;
 }
 
-class addVocable : public QDialog
+class AddVocable : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit addVocable(QWidget *parent = 0);
-    ~addVocable();
+    explicit AddVocable(QWidget *parent = 0);
+    ~AddVocable();
 
 private slots:
     void on_hinzufuegenButton_clicked();
+
+    void on_resetButton_clicked();
 
 private:
     Ui::addVocable *ui;
