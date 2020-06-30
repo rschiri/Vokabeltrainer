@@ -24,18 +24,12 @@ bool DatabaseConnection::openConnection() {
 }
 
 void DatabaseConnection::closeConnection(){
-
     {
+
             QSqlDatabase db = QSqlDatabase::database();
             db.close();
-        }
-        QSqlDatabase::removeDatabase( QSqlDatabase::defaultConnection );
+    }
+    QSqlDatabase::removeDatabase( QSqlDatabase::defaultConnection );
 
-
-
-
-   // QSqlDatabase db = QSqlDatabase::database();
-    //db.close();
-    //QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection);
 }
 
