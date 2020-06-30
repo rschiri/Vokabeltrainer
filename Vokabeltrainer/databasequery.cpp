@@ -2,7 +2,6 @@
 #include "databaseconnection.h"
 
 #include <QTextStream>
-#include <QDebug>
 
 Databasequery::Databasequery()
 {
@@ -143,7 +142,6 @@ int Databasequery::addWord(DatabaseConnection &dbc, const QString &statement,QSt
     qry->exec();
     qry->next();
     wordid = qry->value(0).toInt();
-    qDebug() << wordid << " aus Databasequery";
     return wordid;
 }
 
