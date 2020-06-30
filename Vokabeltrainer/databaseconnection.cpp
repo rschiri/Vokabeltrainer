@@ -17,13 +17,19 @@ bool DatabaseConnection::openConnection() {
     db.setUserName("postgres");
     db.setPassword("Postgres123.");
     bool success = db.open();
-    return success;
     qDebug()<<"Database connection established: "<<success;
+    return success;
+
 
 }
 
 void DatabaseConnection::closeConnection(){
-    db.close();
-    QSqlDatabase::removeDatabase("QPSQL");
+    {
+
+            QSqlDatabase db = QSqlDatabase::database();
+            db.close();
+    }
+    QSqlDatabase::removeDatabase( QSqlDatabase::defaultConnection );
+
 }
 

@@ -26,11 +26,14 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->quit_Button, &QPushButton::clicked,this, &MainWindow::close);
 
     Databasequery dbq;
+    DatabaseConnection dbc;
+    dbc.openConnection();
     //ui->comboBoxBox->addItems(dbq.getAllBoxes);
-    ui->comboBoxCategory->addItems(dbq.getAllCategories());
-    ui->comboBoxWordtype->addItems(dbq.getAllWordtypes());
-    ui->comboBoxSourceLanguage->addItems(dbq.getAllLanguages());
-    ui->comboBoxDestinationLanguage->addItems(dbq.getAllLanguagesExcept("Deutsch"));
+    ui->comboBoxCategory->addItems(dbq.getAllCategories(dbc));
+    ui->comboBoxWordtype->addItems(dbq.getAllWordtypes(dbc));
+    ui->comboBoxSourceLanguage->addItems(dbq.getAllLanguages(dbc));
+    ui->comboBoxDestinationLanguage->addItems(dbq.getAllLanguagesExcept(dbc,"Deutsch"));
+    dbc.closeConnection();
 
 }
 
