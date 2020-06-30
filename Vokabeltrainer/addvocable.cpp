@@ -6,7 +6,6 @@
 #include <QSqlError>
 
 #include <databasequery.h>
-#include <QDebug>
 
 AddVocable::AddVocable(QWidget *parent) :
     QDialog(parent),
@@ -61,8 +60,6 @@ void AddVocable::on_hinzufuegenButton_clicked()
     if(!stringLanguageWords.isEmpty()){
         wordid2 = dbq.addWord(dbc,stringLanguageWords,ui->spracheWortartComboBox->currentText(),ui->spracheComboBox->currentText());
     }
-    qDebug() << wordid1 << " ist id 1";
-    qDebug() << wordid2 << " ist id 2";
     QMessageBox msgbox;
     if(wordid1 > 0 && wordid2 > 0){
         dbq.addVocable(dbc,wordid1,wordid2,ui->kategorieComboBox->currentText());
