@@ -12,25 +12,25 @@ public:
     Databasequery();
     ~Databasequery();
 
-    QStringList getAllCategories();
-    QStringList getAllWordtypes();
-    QStringList getAllLanguages();
-    QStringList getAllLanguagesExcept(QString language);
+    QStringList getAllCategories(DatabaseConnection &dbc);
+    QStringList getAllWordtypes(DatabaseConnection &dbc);
+    QStringList getAllLanguages(DatabaseConnection &dbc);
+    QStringList getAllLanguagesExcept(DatabaseConnection &dbc,QString language);
 
-    int getIDCategory(DatabaseConnection &dbc,QString category);
-    int getIDWordtype(DatabaseConnection &dbc,QString wordtype);
-    int getIDLanguage(DatabaseConnection &dbc,QString language);
+    int getIDCategory(DatabaseConnection &dbc,QString &category);
+    int getIDWordtype(DatabaseConnection &dbc,QString &wordtype);
+    int getIDLanguage(DatabaseConnection &dbc,QString &language);
 
-    bool checkCategory(QString category);
-    bool checkWordtype(QString wordtype);
-    bool checkLanguage(QString language);
+    bool checkCategory(DatabaseConnection &dbc, QString &category);
+    bool checkWordtype(DatabaseConnection &dbc, QString &wordtype);
+    bool checkLanguage(DatabaseConnection &dbc, QString &language);
 
-    void addCategory(QString category);
-    void addWordtype(QString wordtype);
-    void addLanguage(QString language);
+    void addCategory(DatabaseConnection &dbc, QString &category);
+    void addWordtype(DatabaseConnection &dbc, QString &wordtype);
+    void addLanguage(DatabaseConnection &dbc, QString &language);
 
-    int addWord(QString statement,QString wordtype,QString language);
-    void addVocable(int &wordid1,int &wordid2, QString category);
+    int addWord(DatabaseConnection &dbc, const QString &statement,QString wordtype,QString language);
+    void addVocable(DatabaseConnection &dbc, int wordid1,int wordid2, QString category);
 
 };
 
