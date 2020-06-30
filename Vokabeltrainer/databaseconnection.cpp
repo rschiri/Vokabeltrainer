@@ -23,7 +23,10 @@ bool DatabaseConnection::openConnection() {
 }
 
 void DatabaseConnection::closeConnection(){
-    db.close();
-    QSqlDatabase::removeDatabase("QPSQL");
+        {
+            QSqlDatabase db = QSqlDatabase::database();
+            db.close();
+        }
+        QSqlDatabase::removeDatabase( QSqlDatabase::defaultConnection );
 }
 
