@@ -127,8 +127,8 @@
       <widget class="QLabel" name="labelQuiz">
        <property name="geometry">
         <rect>
-         <x>220</x>
-         <y>100</y>
+         <x>210</x>
+         <y>60</y>
          <width>67</width>
          <height>17</height>
         </rect>
@@ -140,8 +140,8 @@
       <widget class="QLabel" name="labelResult">
        <property name="geometry">
         <rect>
-         <x>230</x>
-         <y>300</y>
+         <x>210</x>
+         <y>230</y>
          <width>67</width>
          <height>17</height>
         </rect>
@@ -150,58 +150,36 @@
         <string>TextLabel</string>
        </property>
       </widget>
-      <widget class="QRadioButton" name="vocableOption1">
+      <widget class="QLineEdit" name="editAnswer">
        <property name="geometry">
         <rect>
-         <x>220</x>
-         <y>150</y>
-         <width>112</width>
-         <height>23</height>
+         <x>200</x>
+         <y>110</y>
+         <width>113</width>
+         <height>25</height>
         </rect>
        </property>
-       <property name="text">
-        <string>RadioButton</string>
-       </property>
       </widget>
-      <widget class="QRadioButton" name="vocableOption2">
+      <widget class="QPushButton" name="buttonCompare">
        <property name="geometry">
         <rect>
-         <x>220</x>
-         <y>200</y>
-         <width>112</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>RadioButton</string>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="vocableOption3">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>250</y>
-         <width>112</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>RadioButton</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="buttonTestVocabulary">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>50</y>
-         <width>137</width>
+         <x>200</x>
+         <y>160</y>
+         <width>89</width>
          <height>25</height>
         </rect>
        </property>
        <property name="text">
-        <string>Vokabeln abfragen</string>
+        <string>Vergleichen</string>
        </property>
       </widget>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="buttonTestVocabulary">
+      <property name="text">
+       <string>Vokabeln abfragen</string>
+      </property>
      </widget>
     </item>
    </layout>
