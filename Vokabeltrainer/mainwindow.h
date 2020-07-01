@@ -34,6 +34,10 @@ private slots:
 
     int getChosenVocableOption();
 
+    void on_actionSprache_triggered();
+
+    void on_actionWortart_triggered();
+
 private:
 
     //Über das Objekt ui kann man dann später auf die ganzen Widgets in dem MainWindow zugreifen
