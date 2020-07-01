@@ -55,30 +55,63 @@ void MainWindow::on_Neu_Button_clicked()
     addVoc.setModal(true);
     addVoc.exec();
 }
-
+/**
+ * @brief MainWindow::on_actionKategorie_triggered Adds a category to the database if not existing
+ */
 void MainWindow::on_actionKategorie_triggered()
 {
-    QCheckBox *check = new QCheckBox;
+    DatabaseConnection dbc;
+    Databasequery dbq;
     bool ok = false;
     QString text = QInputDialog::getText(this, "Neue Kategorie", "Name:", QLineEdit::Normal, "", &ok);
 
-    /*
-    bool hidden = true;
-    ui->vocableOption1->setHidden(hidden);
-    ui->vocableOption2->setHidden(hidden);
-    ui->vocableOption3->setHidden(hidden);
-    */
-
-
-    if(ok && !text.isEmpty()){
-
-        check->setText(text);
-        //ui->verticalLayout_2->addWidget(check);
-
+    dbc.openConnection();
+    if(ok && !text.isEmpty() && !dbq.checkCategory(dbc,text)){
+        dbq.addCategory(dbc,text);
+        QMessageBox::information(this,"Information", "Kategorie wurde hinzugefügt.");
+    }else{
+        QMessageBox::information(this,"Information", "Kategorie existiert bereits.");
     }
+    dbc.closeConnection();
 }
+/**
+ * @brief MainWindow::on_actionSprache_triggered Adds a language to the database if not existing
+ */
+void MainWindow::on_actionSprache_triggered()
+{
+    DatabaseConnection dbc;
+    Databasequery dbq;
+    bool ok = false;
+    QString text = QInputDialog::getText(this, "Neue Sprache", "Name:", QLineEdit::Normal, "", &ok);
 
+    dbc.openConnection();
+    if(ok && !text.isEmpty() && !dbq.checkLanguage(dbc,text)){
+        dbq.addLanguage(dbc,text);
+        QMessageBox::information(this,"Information", "Sprache wurde hinzugefügt.");
+    }else{
+        QMessageBox::information(this,"Information", "Sprache existiert bereits.");
+    }
+    dbc.closeConnection();
+}
+/**
+ * @brief MainWindow::on_actionWortart_triggered Adds a wordtype to the database if not existing
+ */
+void MainWindow::on_actionWortart_triggered()
+{
+    DatabaseConnection dbc;
+    Databasequery dbq;
+    bool ok = false;
+    QString text = QInputDialog::getText(this, "Neue Wortart", "Name:", QLineEdit::Normal, "", &ok);
 
+    dbc.openConnection();
+    if(ok && !text.isEmpty() && !dbq.checkWordtype(dbc,text)){
+        dbq.addWordtype(dbc,text);
+        QMessageBox::information(this,"Information", "Wortart wurde hinzugefügt.");
+    }else{
+        QMessageBox::information(this,"Information", "Wortart existiert bereits.");
+    }
+    dbc.closeConnection();
+}
 
 void MainWindow::on_actionOpen_triggered()
 {
@@ -306,4 +339,6 @@ void MainWindow::on_vocableOption3_clicked()
     ui->vocableOption3->setDisabled(checked);
     // vocable updaten
 }
+
+
 

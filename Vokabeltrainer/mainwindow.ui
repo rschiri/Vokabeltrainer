@@ -227,6 +227,8 @@
     </property>
     <addaction name="separator"/>
     <addaction name="actionKategorie"/>
+    <addaction name="actionSprache"/>
+    <addaction name="actionWortart"/>
    </widget>
    <widget class="QMenu" name="menuSave">
     <property name="title">
@@ -287,6 +289,16 @@
   <action name="actionOpen">
    <property name="text">
     <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSprache">
+   <property name="text">
+    <string>Sprache</string>
+   </property>
+  </action>
+  <action name="actionWortart">
+   <property name="text">
+    <string>Wortart</string>
    </property>
   </action>
  </widget>
