@@ -4,7 +4,6 @@
 #include "woerterbuch.h"
 #include "databasequery.h"
 #include "databaseconnection.h"
-#include "vocablequiz.h"
 #include <QApplication>
 #include <QToolBar>
 #include <QInputDialog>
