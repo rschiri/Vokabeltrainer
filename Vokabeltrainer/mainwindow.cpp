@@ -4,6 +4,7 @@
 #include "woerterbuch.h"
 #include "databasequery.h"
 #include "databaseconnection.h"
+#include "vocablequiz.h"
 #include <QApplication>
 #include <QToolBar>
 #include <QInputDialog>
@@ -25,14 +26,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     QObject::connect(ui->quit_Button, &QPushButton::clicked,this, &MainWindow::close);
 
+
+    QStringList qStringList;
+    for(int i = 1; i<=5; i++) {
+        QString boxnumber = QString::number(i);
+        qStringList.push_back(boxnumber);
+    }
+
     Databasequery dbq;
     DatabaseConnection dbc;
     dbc.openConnection();
-    //ui->comboBoxBox->addItems(dbq.getAllBoxes);
+    ui->comboBoxBox->addItems(qStringList);
     ui->comboBoxCategory->addItems(dbq.getAllCategories(dbc));
     ui->comboBoxWordtype->addItems(dbq.getAllWordtypes(dbc));
     ui->comboBoxSourceLanguage->addItems(dbq.getAllLanguages(dbc));
-    ui->comboBoxDestinationLanguage->addItems(dbq.getAllLanguagesExcept(dbc,"Deutsch"));
+    sourceLanguage = ui->comboBoxSourceLanguage->currentText();
     dbc.closeConnection();
 
 }
@@ -124,221 +132,216 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_buttonTestVocabulary_clicked()
 {
+    word1="";
+    word2="";
+    box=0;
+    counter=-1;
+    categoryid=0;
+    used=-1;
+    usedright=-1;
+    wordVocableId1=0;
+    wordVocableId2=0;
 
+    ui->labelQuiz->setText("");
     ui->labelResult->setText("");
-    bool checkable = true;
+    ui->editAnswer->clear();
 
-    /*
-    ui->vocableOption1->setVisible(checkable);
-    ui->vocableOption2->setVisible(checkable);
-    ui->vocableOption3->setVisible(checkable);
-    */
-
-    ui->vocableOption1->setEnabled(checkable);
-    ui->vocableOption2->setEnabled(checkable);
-    ui->vocableOption3->setEnabled(checkable);
-
-    ui->vocableOption1->setCheckable(checkable);
-    ui->vocableOption2->setCheckable(checkable);
-    ui->vocableOption3->setCheckable(checkable);
-
-    if(ui->vocableOption1->isChecked()){
-        ui->vocableOption1->setChecked(checkable);
-    }
-
-    if(ui->vocableOption2->isChecked()){
-        ui->vocableOption2->setChecked(checkable);
-    }
-
-    if(ui->vocableOption3->isChecked()){
-        ui->vocableOption3->setChecked(checkable);
-    }
-
-
-    // hol abzufragende Vokabel und speichere die Daten -> Details von comboboxen
 
     DatabaseConnection conn;
 
-        if(conn.openConnection()){
+    if(conn.openConnection()){
 
-                // Die Vokabel, die abgefragt werden soll, wird von der DB geholt -> DYNAMISCH machen & RANDOM
-                QSqlQuery query;
-                query.exec("select w1.word as wordid1, w2.word as wordid2, box, counter, categoryid, used, usedright from vocable as v left join word as w1 on v.wordid1=w1.wordid left join word as w2 on v.wordid2=w2.wordid where wordid1=1 and wordid2=6");
-                QString word1;
-                QString word2;
+        QString comboBox = ui->comboBoxBox->currentText();
+        QString comboCategory = ui->comboBoxCategory->currentText();
+        QString comboWordtype = ui->comboBoxWordtype->currentText();
+        QString comboSourceLanguage = ui->comboBoxSourceLanguage->currentText();
+        QString comboDestinationLanguage = ui->comboBoxDestinationLanguage->currentText();
 
-                /*
-                ui->labelResult->setText("");
-                bool checkable = true;
+        // categoryid für query raussuchen
+        QSqlQuery queryCategory;
+        queryCategory.exec("select categoryid from category where category = '" + comboCategory + "'");
+        queryCategory.next();
+        QString categoryid = queryCategory.value(0).toString();
 
-                ui->vocableOption1->setEnabled(checkable);
-                ui->vocableOption2->setEnabled(checkable);
-                ui->vocableOption3->setEnabled(checkable);
+        // wordtypeid für query raussuchen
+        QSqlQuery queryWordtpye;
+        queryWordtpye.exec("select wordtypeid from wordtype where wordtype = '" + comboWordtype + "'");
+        queryWordtpye.next();
+        QString wordtypeid = queryWordtpye.value(0).toString();
 
-                ui->vocableOption1->setCheckable(checkable);
-                ui->vocableOption2->setCheckable(checkable);
-                ui->vocableOption3->setCheckable(checkable);
-                */
+        // languagesid sourceLanguage für query raussuchen
+        QSqlQuery querySourceLanguageId;
+        querySourceLanguageId.exec("select languagesid from languages where language = '" + comboSourceLanguage + "'");
+        querySourceLanguageId.next();
+        QString sourceLanguageId = querySourceLanguageId.value(0).toString();
 
-
-
-                while(query.next()){
-                    // für qstring word1 und word2 muss noch von der tabelle word der QString geholt werden
-                    word1 = query.value(0).toString();
-                    word2 = query.value(1).toString();
-
-                    //box wird erhöht, wenn richtig beantwortet (und counter auf einen bestimmten Wert kommt?) -> muss noch hinzugefügt werden
-                    //int box = query.value(2).toInt();
-
-                    // counter wird in jedem fall erhöht -> muss noch hinzugefügt werden (bis zu einem bestimmten Wert erhöhen?)
-                    //int counter = query.value(3).toInt();
-
-                    // wird (wahrscheinlich) nicht geändert -> wahrscheinlich sinnvoll für herauspicken der Vokabeln
-                    //int categoryid = query.value(4).toInt();
-
-                    // used wird in jedem fall erhöht -> muss noch hinzugefügt werden (used kann endlos groß werden, oder?)
-                    //int used = query.value(5).toInt();
-
-                    // usedright wird erhöht, wenn richtig beantwortet -> muss noch hinzugefügt werden
-                    //int usedright = query.value(6).toInt();
-
-                }
-
-
-                // hol 2 weitere Vokabeln von der gleichen Sprache -> combobox zielsprache
-
-                // eine zufällige, falsche Vokabel wird geholt mit der gleichen Zielsprache -> noch ändern
-                QSqlQuery queryFalsch1;
-                //queryFalsch1.exec("select word.word from word where wordid = 8");
-                //queryFalsch1.exec("select word.word from word where wordid != 1 || 2 and random()");
-                queryFalsch1.exec("select word.word from word order by random()");
-                QString wordFalsch1;
-
-                while(queryFalsch1.next()){
-                    wordFalsch1 = queryFalsch1.value(0).toString();
-                }
-
-                // eine weitere zufällige, falsche Vokabel wird geholt mit der gleichen Zielsprache -> noch ändern
-                QSqlQuery queryFalsch2;
-                //queryFalsch2.exec("select word.word from word where wordid = 7");
-                queryFalsch2.exec("select word.word from word order by random()");
-                QString wordFalsch2;
-
-                while(queryFalsch2.next()){
-                    wordFalsch2 = queryFalsch2.value(0).toString();
-                }
-
-                conn.closeConnection();
-
-                // füll labelAbfrage mit richtigerVokabelAbfrageQuiz
-                ui->labelQuiz->setText(word1);
-
-                // initialisiere int richtigeOption mit einer random zahl zwischen 1 und 3
-                srand((unsigned)time(NULL));
-                rightOption = (rand() %3);
-
-
-                qDebug() << rightOption;
-                // option_? an der stelle int richtigeOption mit lösung zur Vokabel Abfrage füllen, den Rest mit den falschen Vokabeloptionen
-                if(rightOption == 0){
-                    ui->vocableOption1->setText(word2);
-                    ui->vocableOption2->setText(wordFalsch1);
-                    ui->vocableOption3->setText(wordFalsch2);
-                }else if(rightOption == 1){
-                    ui->vocableOption1->setText(wordFalsch1);
-                    ui->vocableOption2->setText(word2);
-                    ui->vocableOption3->setText(wordFalsch2);
-                }else if(rightOption == 2){
-                    ui->vocableOption1->setText(wordFalsch1);
-                    ui->vocableOption2->setText(wordFalsch2);
-                    ui->vocableOption3->setText(word2);
-                }
+        // languagesid destinationLanguage für query raussuchen
+        QSqlQuery queryDestinationLanguageId;
+        queryDestinationLanguageId.exec("select languagesid from languages where language = '" + comboDestinationLanguage + "'");
+        queryDestinationLanguageId.next();
+        QString destinationLanguageId = queryDestinationLanguageId.value(0).toString();
 
 
 
-                ui->labelQuiz->resize(this->width(), ui->labelQuiz->height());
-                ui->labelResult->resize(this->width(), ui->labelResult->height());
-                ui->vocableOption1->resize(this->width(), ui->vocableOption1->height());
-                ui->vocableOption2->resize(this->width(), ui->vocableOption2->height());
-                ui->vocableOption3->resize(this->width(), ui->vocableOption3->height());
+        QSqlQuery query;
+        if(comboSourceLanguage == "Deutsch"){
+            query.exec("select w1.word as wordid1, w2.word as wordid2, box, counter, categoryid, used, usedright, wordid1, wordid2 from vocable as v left join word as w1 on v.wordid1=w1.wordid left join word as w2 on v.wordid2=w2.wordid where box = '" + comboBox + "' and categoryid = '" + categoryid + "' and w1.wordtypeid = '" + wordtypeid + "' and w1.languageid = '" + sourceLanguageId + "' and w2.languageid = '" + destinationLanguageId + "' order by random()");
+        }else{
+            query.exec("select w1.word as wordid1, w2.word as wordid2, box, counter, categoryid, used, usedright, wordid1, wordid2 from vocable as v left join word as w1 on v.wordid1=w1.wordid left join word as w2 on v.wordid2=w2.wordid where box = '" + comboBox + "' and categoryid = '" + categoryid + "' and w1.wordtypeid = '" + wordtypeid + "' and w2.languageid = '" + sourceLanguageId + "' and w1.languageid = '" + destinationLanguageId + "' order by random()");
+
+        }
+
+        while(query.next()){
+            // für qstring word1 und word2 muss noch von der tabelle word der QString geholt werden
+            word1 = query.value(0).toString();
+            word2 = query.value(1).toString();
+
+            //box wird erhöht, wenn richtig beantwortet (und counter auf einen bestimmten Wert kommt?) -> muss noch hinzugefügt werden
+            box = query.value(2).toInt();
+
+            // counter wird in jedem fall erhöht -> muss noch hinzugefügt werden (bis zu einem bestimmten Wert erhöhen?)
+            counter = query.value(3).toInt();
+
+            // wird (wahrscheinlich) nicht geändert -> wahrscheinlich sinnvoll für herauspicken der Vokabeln
+            //int categoryid = query.value(4).toInt();
+
+            // used wird in jedem fall erhöht -> muss noch hinzugefügt werden (used kann endlos groß werden, oder?)
+            used = query.value(5).toInt();
+
+            // usedright wird erhöht, wenn richtig beantwortet -> muss noch hinzugefügt werden
+            usedright = query.value(6).toInt();
+
+            // wordid1
+            wordVocableId1 = query.value(7).toInt();
+
+            // wordid2
+            wordVocableId2 = query.value(8).toInt();
 
 
+        }
+
+        conn.closeConnection();
+
+        if(word1 == "" && word2 == ""){
+            QMessageBox msgbox;
+            msgbox.setText("Es gibt keine Vokabel mit der Kombination an Parametern. Bitte probiere etwas anderes oder füge neue Vokabeln mit den entprechenden Parametern hinzu.");
+            msgbox.exec();
+        }
+
+        word1.remove(char('{'));
+        word1.remove(char('}'));
+        word1.remove(char('"'));
+
+        word2.remove(char('{'));
+        word2.remove(char('}'));
+        word2.remove(char('"'));
+
+
+        // wenn ausgangssprache nicht deutsch, dann word2 setText
+        // QString vocableQuiz;
+        if(comboSourceLanguage != "Deutsch"){
+            ui->labelQuiz->setText(word2);
+            vocableQuiz = word1;
+        }else{
+            ui->labelQuiz->setText(word1);
+            vocableQuiz = word2;
+        }
+
+        ui->labelQuiz->resize(this->width(), ui->labelQuiz->height());
+
+        ui->labelResult->resize(this->width(), ui->labelResult->height());
+
+
+    }
+
+    else if (!conn.openConnection()){
+
+        QMessageBox msgbox;
+        msgbox.setText("Verbindung zur Datenbank konnte nicht hergestellt werden");
+        msgbox.exec();
+
+    }
+
+}
+
+
+
+void MainWindow::on_comboBoxSourceLanguage_currentTextChanged(const QString &arg1){
+
+    DatabaseConnection dbc;
+    comboboxChangeDestinationLanguage(dbc, arg1);
+
+}
+
+
+void MainWindow::comboboxChangeDestinationLanguage(DatabaseConnection &dbc, const QString &arg1){
+
+    Databasequery dbq;
+    ui->comboBoxDestinationLanguage->clear();
+    dbc.closeConnection();
+    dbc.openConnection();
+    ui->comboBoxDestinationLanguage->addItems(dbq.getAllLanguagesExcept(dbc, arg1));
+    dbc.closeConnection();
+}
+
+
+void MainWindow::on_buttonCompare_clicked()
+{
+    QString answer = ui->editAnswer->text();
+
+    vocableQuiz.remove(char(' '));
+    answer.remove(char(' '));
+
+    QStringList listVocableQuiz = vocableQuiz.split(QLatin1Char(','));
+
+    QStringList listAnswer = answer.split(QLatin1Char(','));
+
+    int matches = 0;
+    int givenanswers = 0;
+
+
+    foreach(answer, listAnswer){
+        givenanswers++;
+        foreach(vocableQuiz, listVocableQuiz){
+            if(answer==vocableQuiz){
+                matches++;
             }
-
-        else if (!conn.openConnection()){
-
-                QMessageBox msgbox;
-                msgbox.setText("Verbindung zur Datenbank konnte nicht hergestellt werden");
-                msgbox.exec();
-
-            }
-
-            //conn.closeConnection();
-
-
-}
-
-
-int MainWindow::getChosenVocableOption(){
-    return -1;
-}
-
-
-void MainWindow::on_vocableOption1_clicked()
-{
-
-    if(rightOption == 0){
-        ui->labelResult->setText("Richtig! :)");
-    }else if(rightOption != 0){
-        ui->labelResult->setText("Falsch! :(");
+        }
     }
 
-    qDebug() << rightOption << "sollte 0 sein";
 
-    bool checked = true;
-    ui->vocableOption1->setDisabled(checked);
-    ui->vocableOption2->setDisabled(checked);
-    ui->vocableOption3->setDisabled(checked);
-    // vocable updaten
-}
-
-
-void MainWindow::on_vocableOption2_clicked()
-{
-
-    if(rightOption == 1){
+    // wenn text von labelquiz == eingabe ist
+    //QString answer = ui->editAnswer->text();
+    if(matches==givenanswers){
         ui->labelResult->setText("Richtig! :)");
-    }else if(rightOption != 1){
-        ui->labelResult->setText("Falsch! :(");
+        counter++;
+        usedright++;
+        if(box < 5 && counter == 3){
+            box++;
+            counter = 0;
+        }
+    }else if(matches!=givenanswers){
+        ui->labelResult->setText("Falsch");
+        counter = 0;
+        box = 1;
     }
 
-    qDebug() << rightOption << "sollte 1 sein";
+    used++;
 
-    bool checked = true;
-    ui->vocableOption1->setDisabled(checked);
-    ui->vocableOption2->setDisabled(checked);
-    ui->vocableOption3->setDisabled(checked);
-    // vocable updaten
-}
+    QString updatebox = updatebox.number(box);
+    QString updatecounter = updatecounter.number(counter);
+    QString updateused = updateused.number(used);
+    QString updateusedright = updateusedright.number(usedright);
+    QString updatewordVocableId1 = updatewordVocableId1.number(wordVocableId1);
+    QString updatewordVocableId2 = updatewordVocableId2.number(wordVocableId2);
 
 
-void MainWindow::on_vocableOption3_clicked()
-{
+    DatabaseConnection conn;
 
-    if(rightOption == 2){
-        ui->labelResult->setText("Richtig! :)");
-    }else if(rightOption != 2){
-        ui->labelResult->setText("Falsch! :(");
+    if(conn.openConnection()){
+        QSqlQuery query;
+        query.exec("update vocable set box= '" + updatebox + "', counter = '" + updatecounter + "', used = '" + updateused + "', usedright = '" + updateusedright + "' where wordid1 = '" + updatewordVocableId1 +  "' and wordid2 = '" + updatewordVocableId2 + "'");
+        conn.closeConnection();
     }
 
-    qDebug() << rightOption << "sollte 2 sein";
-
-    bool checked = true;
-    ui->vocableOption1->setDisabled(checked);
-    ui->vocableOption2->setDisabled(checked);
-    ui->vocableOption3->setDisabled(checked);
-    // vocable updaten
 }
-
-
-
