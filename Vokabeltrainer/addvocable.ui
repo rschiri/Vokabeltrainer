@@ -38,7 +38,7 @@
      <string>1. Bedeutung</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="deutschBedeutung1LineEdit">
+   <widget class="QLineEdit" name="germanMeaning1LineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -61,7 +61,7 @@
      <string>2. Bedeutung</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="deutschBedeutung2LineEdit">
+   <widget class="QLineEdit" name="germanMeaning2LineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -84,7 +84,7 @@
      <string>3. Bedeutung</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="deutschBedeutung3LineEdit">
+   <widget class="QLineEdit" name="germanMeaning3LineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -94,7 +94,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QComboBox" name="deutschWortartComboBox">
+   <widget class="QComboBox" name="germanWordtypeComboBox">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -156,7 +156,7 @@
      <string>1. Bedeutung</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="spracheBedeutung1LineEdit">
+   <widget class="QLineEdit" name="languageMeaning1LineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -179,7 +179,7 @@
      <string>2. Bedeutung</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="spracheBedeutung2LineEdit">
+   <widget class="QLineEdit" name="languageMeaning2LineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -189,7 +189,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QComboBox" name="spracheWortartComboBox">
+   <widget class="QComboBox" name="languageWordtypeComboBox">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -225,7 +225,7 @@
      <string>Sprache</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="spracheComboBox">
+   <widget class="QComboBox" name="languageComboBox">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -248,7 +248,7 @@
      <string>3. Bedeutung</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="spracheBedeutung3LineEdit">
+   <widget class="QLineEdit" name="languageMeaning3LineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -259,7 +259,7 @@
     </property>
    </widget>
   </widget>
-  <widget class="QComboBox" name="kategorieComboBox">
+  <widget class="QComboBox" name="categoryComboBox">
    <property name="geometry">
     <rect>
      <x>150</x>
