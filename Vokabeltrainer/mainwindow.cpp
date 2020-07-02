@@ -1,3 +1,7 @@
+/**
+*@author: Christin, Rebecca
+*/
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "addvocable.h"
