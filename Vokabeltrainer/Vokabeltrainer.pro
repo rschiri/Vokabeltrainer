@@ -31,7 +31,6 @@ SOURCES += \
     addvocable.cpp \
     woerterbuch.cpp \
     databaseconnection.cpp \
-    mytablemodel.cpp \
     databasequery.cpp
 
 HEADERS += \
@@ -39,7 +38,6 @@ HEADERS += \
     addvocable.h \
     woerterbuch.h \
     databaseconnection.h \
-    mytablemodel.h \
     databasequery.h
 
 FORMS += \

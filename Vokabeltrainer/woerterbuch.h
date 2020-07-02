@@ -3,7 +3,11 @@
 
 #include <QDialog>
 #include <QTableView>
-#include "mytablemodel.h"
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
+
+
+#include "databaseconnection.h"
 
 namespace Ui {
 class Woerterbuch;
@@ -14,19 +18,46 @@ class Woerterbuch : public QDialog
     Q_OBJECT
 
 public:
+
     void slotOpenDataFile();
-    void showVocables();
+
     explicit Woerterbuch(QWidget *parent = nullptr);
+
+    void findVocable();
+
+    void showDEVocables();
+    void showDSVocables();
+    void showSearchVocable(QString);
+    bool inVocableList(QVector<QString>, QString);
+
+    void showNomen();
+    void showVerben();
+    void showAdjektive();
+    void showArtikel();
+    void showKonjunktion();
+    void showUnregelVerben();
+
+    void showAdverben();
+    void showPraepositionen();
+    void showPronomen();
+    void showSubMas();
+    void showSubFem();
+    void showSubNeu();
+    void showZahlenwoerter();
+
+
+
     ~Woerterbuch();
 
 private slots:
 
 
-    void on_Button_LoadDatabase_clicked();
-
 private:
 
     Ui::Woerterbuch *ui;
+    QString findText;
+    DatabaseConnection conn;
+    QVector<QString> vocableList;
 };
 
 #endif // WOERTERBUCH_H
