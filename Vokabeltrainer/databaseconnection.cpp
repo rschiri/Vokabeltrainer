@@ -25,7 +25,6 @@ bool DatabaseConnection::openConnection() {
 
 void DatabaseConnection::closeConnection(){
     {
-
             QSqlDatabase db = QSqlDatabase::database();
             db.close();
     }

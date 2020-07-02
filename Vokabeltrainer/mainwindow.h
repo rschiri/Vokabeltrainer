@@ -35,12 +35,18 @@ private slots:
 
     void on_buttonCompare_clicked();
 
-    void comboboxChangeDestinationLanguage(DatabaseConnection &dbc, const QString &arg1);
+    void on_buttonTestNewVocabulary_clicked();
 
+    QString clearUpString(QString word);
+
+    int clearUpInt(int number);
+
+    QString clearStringFromCharacters(QString word);
+    
+    
 private:
 
     Ui::MainWindow *ui;
-    int rightOption;
     QString word1;
     QString word2;
     int box;

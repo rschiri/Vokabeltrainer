@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>825</width>
-    <height>525</height>
+    <height>545</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -127,14 +127,14 @@
       <widget class="QLabel" name="labelQuiz">
        <property name="geometry">
         <rect>
-         <x>210</x>
+         <x>200</x>
          <y>60</y>
-         <width>67</width>
+         <width>131</width>
          <height>17</height>
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>Vokabel Quiz</string>
        </property>
       </widget>
       <widget class="QLabel" name="labelResult">
@@ -147,7 +147,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
       </widget>
       <widget class="QLineEdit" name="editAnswer">
@@ -178,7 +178,14 @@
     <item row="2" column="0">
      <widget class="QPushButton" name="buttonTestVocabulary">
       <property name="text">
-       <string>Vokabeln abfragen</string>
+       <string> Vokabeln abfragen </string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="buttonTestNewVocabulary">
+      <property name="text">
+       <string>neue Vokabeln üben</string>
       </property>
      </widget>
     </item>
@@ -193,12 +200,6 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuDatei">
-    <property name="title">
-     <string>Datei</string>
-    </property>
-    <addaction name="actionNeuer_Karteikasten"/>
-   </widget>
    <widget class="QMenu" name="menuNeu_Hinzuf_gen">
     <property name="title">
      <string>Neu/Hinzufügen</string>
@@ -207,11 +208,6 @@
     <addaction name="actionKategorie"/>
     <addaction name="actionSprache"/>
     <addaction name="actionWortart"/>
-   </widget>
-   <widget class="QMenu" name="menuSave">
-    <property name="title">
-     <string>Save</string>
-    </property>
    </widget>
    <widget class="QMenu" name="menuW_rterbuch">
     <property name="title">
@@ -224,23 +220,9 @@
      <string>Statistiken</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menuSettings">
-    <property name="title">
-     <string>Settings</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuHelp">
-    <property name="title">
-     <string>Help</string>
-    </property>
-   </widget>
-   <addaction name="menuDatei"/>
    <addaction name="menuNeu_Hinzuf_gen"/>
-   <addaction name="menuSave"/>
    <addaction name="menuW_rterbuch"/>
    <addaction name="menuStatistiken"/>
-   <addaction name="menuSettings"/>
-   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBar">
