@@ -1,3 +1,7 @@
+/**
+*@author: Christin
+*/
+
 #ifndef DATABASEQUERY_H
 #define DATABASEQUERY_H
 
