@@ -243,6 +243,22 @@ void Databasequery::addVocable(DatabaseConnection &dbc, int wordid1, int wordid2
     qry->exec();
 }
 
+/**
+ * @brief Databasequery::updateQuizVocable Updates a vocable after the solution has been compared to the users answer
+ * @param dbc the databaseconnection for the query
+ * @param box the box in which the vocable be in
+ * @param counter the counter to keep track whether to change the box the vocable is in
+ * @param used the number of times the vocable has been used in the quiz
+ * @param usedright the number of times the user has given the right answer
+ * @param wordId1 the wordId of the first word of the vocable
+ * @param wordId2 the wordId of the second word of the vocable
+ */
+void Databasequery::updateQuizVocable(DatabaseConnection &dbc, QString box, QString counter, QString used, QString usedright, QString wordId1, QString wordId2){
+    QSqlQuery *query = new QSqlQuery(dbc.db);
+    query->exec("update vocable set box= '" + box + "', counter = '" + counter + "', used = '" + used + "', usedright = '" + usedright + "' where wordid1 = '" + wordId1 +  "' and wordid2 = '" + wordId2 + "'");
+}
+
+
 Databasequery::~Databasequery()
 {
 
