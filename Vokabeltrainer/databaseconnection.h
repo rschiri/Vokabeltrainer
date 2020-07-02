@@ -1,3 +1,7 @@
+/**
+*@author: Christin, Lea, Rebecca
+*/
+
 #ifndef DATABASECONNECTION_H
 #define DATABASECONNECTION_H
 
