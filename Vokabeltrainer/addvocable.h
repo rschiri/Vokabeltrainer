@@ -1,3 +1,7 @@
+/**
+*@author: Christin
+*/
+
 #ifndef ADDVOCABLE_H
 #define ADDVOCABLE_H
 
