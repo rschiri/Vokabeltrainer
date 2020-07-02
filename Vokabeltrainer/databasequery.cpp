@@ -1,3 +1,7 @@
+/**
+*@author: Christin, Rebecca
+*/
+
 #include "databasequery.h"
 #include "databaseconnection.h"
 #include <QTextStream>
