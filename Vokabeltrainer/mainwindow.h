@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <databaseconnection.h>
 
 namespace Ui {
 class MainWindow;
@@ -26,23 +27,32 @@ private slots:
 
     void on_buttonTestVocabulary_clicked();
 
-    void on_vocableOption1_clicked();
-
-    void on_vocableOption2_clicked();
-
-    void on_vocableOption3_clicked();
-
-    int getChosenVocableOption();
-
     void on_actionSprache_triggered();
 
     void on_actionWortart_triggered();
 
+    void on_comboBoxSourceLanguage_currentTextChanged(const QString &arg1);
+
+    void on_buttonCompare_clicked();
+
+    void comboboxChangeDestinationLanguage(DatabaseConnection &dbc, const QString &arg1);
+
 private:
 
-    //Über das Objekt ui kann man dann später auf die ganzen Widgets in dem MainWindow zugreifen
     Ui::MainWindow *ui;
     int rightOption;
+    QString word1;
+    QString word2;
+    int box;
+    int counter;
+    int categoryid;
+    int used;
+    int usedright;
+    QString sourceLanguage;
+    QString destinationLanguage;
+    QString vocableQuiz;
+    int wordVocableId1;
+    int wordVocableId2;
     void close();
 
 };
