@@ -52,18 +52,11 @@ Woerterbuch::Woerterbuch(QWidget *parent) :
 
 }
 
-
 Woerterbuch::~Woerterbuch()
 {
     conn.closeConnection();
     delete ui;
 }
-
-
-/*
-Methode prüft, ob eine Vokabel in das Suchfeld eingegeben wurde und ruft eine Methode auf, die die gesuchte Vokabel erscheinen lässt.
-Gibt Meldungen aus, wenn entweder nichts in das Suchfeld eingegeben wurde oder wenn die eingegebene Vokabel nicht im Wörterbuch enthalten ist.
-*/
 
 /**
  * @brief method checks whether a word has been entered in the search field and calls a method that makes the searched word appear.
@@ -126,7 +119,6 @@ bool Woerterbuch::inVocableList(QVector<QString> vocableList, QString vocable){
 }
 
 
-
 /**
  * @brief shows only the vocabulary the user searched for
  * @param QString string
@@ -142,7 +134,6 @@ void Woerterbuch::showSearchVocable(QString string){
         i = "3";
     }
 
-
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query("select w1.word as wordid1, w2.word as wordid2, box from vocable as v left join word as w1 on v.wordid1 = w1.wordid "
                          "left join word as w2 on v.wordid2 = w2.wordid where w1.languageid =1 AND w2.languageid = "+i+" AND w1.word = '"+ string+"' ", conn.db);
@@ -151,8 +142,8 @@ void Woerterbuch::showSearchVocable(QString string){
     ui->tableView->setModel(model);
     ui->tableView->resizeColumnsToContents();
 
-
 }
+
 
 /**
  * @brief shows just the german-english vocabulary
@@ -207,6 +198,9 @@ void Woerterbuch::showNomen(){
 
 }
 
+/**
+ * @brief shows all verbs. either all German verbs or all verbs of the foreign language
+ */
 void Woerterbuch::showVerben(){
     QString i = "2";
     QString word = "w1";
@@ -221,10 +215,7 @@ void Woerterbuch::showVerben(){
         word = "w2";
     }
 
-
     QSqlQueryModel *model = new QSqlQueryModel();
-
-
     QSqlQuery query("select w1.word as wordid1, w2.word as wordid2, box from vocable as v left join word as w1 on v.wordid1 = w1.wordid "
                          "left join word as w2 on v.wordid2 = w2.wordid where w1.languageid =1 AND w2.languageid = "+i+" AND "+word+".wordtypeid = 10 ", conn.db);
     model->setQuery(query);
@@ -232,7 +223,9 @@ void Woerterbuch::showVerben(){
     ui->tableView->resizeColumnsToContents();
 }
 
-
+/**
+ * @brief shows all adjectives. either all German adjectives or all adjectives of the foreign language
+ */
 void Woerterbuch::showAdjektive(){
     QString i = "2";
     QString word = "w1";
@@ -247,7 +240,6 @@ void Woerterbuch::showAdjektive(){
         word = "w2";
     }
 
-
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query("select w1.word as wordid1, w2.word as wordid2, box from vocable as v left join word as w1 on v.wordid1 = w1.wordid "
                          "left join word as w2 on v.wordid2 = w2.wordid where w1.languageid =1 AND w2.languageid = "+i+" AND "+word+".wordtypeid = 2 ", conn.db);
@@ -256,9 +248,11 @@ void Woerterbuch::showAdjektive(){
     ui->tableView->setModel(model);
     ui->tableView->resizeColumnsToContents();
 
-
 }
 
+/**
+ * @brief shows all articles. either all German articles or all articles of the foreign language
+ */
 void Woerterbuch::showArtikel(){
     QString i = "2";
     QString word = "w1";
@@ -284,7 +278,9 @@ void Woerterbuch::showArtikel(){
 
 }
 
-
+/**
+ * @brief shows all conjunctions. either all German conjunctions or all conjunctions of the foreign language
+ */
 void Woerterbuch::showKonjunktion(){
     QString i = "2";
     QString word = "w1";
@@ -299,7 +295,6 @@ void Woerterbuch::showKonjunktion(){
         word = "w2";
     }
 
-
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query("select w1.word as wordid1, w2.word as wordid2, box from vocable as v left join word as w1 on v.wordid1 = w1.wordid "
                          "left join word as w2 on v.wordid2 = w2.wordid where w1.languageid =1 AND w2.languageid = "+i+" AND "+word+".wordtypeid = 6 ", conn.db);
@@ -310,6 +305,9 @@ void Woerterbuch::showKonjunktion(){
 
 }
 
+/**
+ * @brief shows all irregular verbs in english
+ */
 void Woerterbuch::showUnregelVerben(){
     QString i = "2";
 
@@ -320,7 +318,6 @@ void Woerterbuch::showUnregelVerben(){
         i = "3";
     }
 
-
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query("select w1.word as wordid1, w2.word as wordid2, box from vocable as v left join word as w1 on v.wordid1 = w1.wordid "
                          "left join word as w2 on v.wordid2 = w2.wordid where w1.languageid =1 AND w2.languageid = 2 AND w2.wordtypeid = 11 ", conn.db);
@@ -330,7 +327,9 @@ void Woerterbuch::showUnregelVerben(){
     ui->tableView->resizeColumnsToContents();
 
 }
-
+/**
+ * @brief shows all adverbs. either all German adverbs or all adverbs of the foreign language
+ */
 void Woerterbuch::showAdverben(){
     QString i = "2";
     QString word = "w1";
@@ -345,7 +344,6 @@ void Woerterbuch::showAdverben(){
         word = "w2";
     }
 
-
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query("select w1.word as wordid1, w2.word as wordid2, box from vocable as v left join word as w1 on v.wordid1 = w1.wordid "
                          "left join word as w2 on v.wordid2 = w2.wordid where w1.languageid =1 AND w2.languageid = "+i+" AND "+word+".wordtypeid = 3 ", conn.db);
@@ -355,6 +353,10 @@ void Woerterbuch::showAdverben(){
     ui->tableView->resizeColumnsToContents();
 
 }
+
+/**
+ * @brief shows all prepositions. either all German prepositions or all prepositions of the foreign language
+ */
 void Woerterbuch::showPraepositionen(){
     QString i = "2";
     QString word = "w1";
@@ -369,7 +371,6 @@ void Woerterbuch::showPraepositionen(){
         word = "w2";
     }
 
-
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query("select w1.word as wordid1, w2.word as wordid2, box from vocable as v left join word as w1 on v.wordid1 = w1.wordid "
                          "left join word as w2 on v.wordid2 = w2.wordid where w1.languageid =1 AND w2.languageid = "+i+" AND "+word+".wordtypeid = 8 ", conn.db);
@@ -379,6 +380,10 @@ void Woerterbuch::showPraepositionen(){
     ui->tableView->resizeColumnsToContents();
 
 }
+
+/**
+ * @brief shows all pronouns. either all German pronouns or all pronouns of the foreign language
+ */
 void Woerterbuch::showPronomen(){
     QString i = "2";
     QString word = "w1";
@@ -393,7 +398,6 @@ void Woerterbuch::showPronomen(){
         word = "w2";
     }
 
-
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query("select w1.word as wordid1, w2.word as wordid2, box from vocable as v left join word as w1 on v.wordid1 = w1.wordid "
                          "left join word as w2 on v.wordid2 = w2.wordid where w1.languageid =1 AND w2.languageid = "+i+" AND "+word+".wordtypeid = 9 ", conn.db);
@@ -403,6 +407,10 @@ void Woerterbuch::showPronomen(){
     ui->tableView->resizeColumnsToContents();
 
 }
+
+/**
+ * @brief shows all masculine nouns. either all German nouns or all nouns of the foreign language
+ */
 void Woerterbuch::showSubMas(){
     QString i = "2";
     QString word = "w1";
@@ -417,7 +425,6 @@ void Woerterbuch::showSubMas(){
         word = "w2";
     }
 
-
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query("select w1.word as wordid1, w2.word as wordid2, box from vocable as v left join word as w1 on v.wordid1 = w1.wordid "
                          "left join word as w2 on v.wordid2 = w2.wordid where w1.languageid =1 AND w2.languageid = "+i+" AND "+word+".wordtypeid = 14 ", conn.db);
@@ -427,6 +434,10 @@ void Woerterbuch::showSubMas(){
     ui->tableView->resizeColumnsToContents();
 
 }
+
+/**
+ * @brief shows all feminine nouns. either all German nouns or all nouns of the foreign language
+ */
 void Woerterbuch::showSubFem(){
     QString i = "2";
     QString word = "w1";
@@ -441,7 +452,6 @@ void Woerterbuch::showSubFem(){
         word = "w2";
     }
 
-
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query("select w1.word as wordid1, w2.word as wordid2, box from vocable as v left join word as w1 on v.wordid1 = w1.wordid "
                          "left join word as w2 on v.wordid2 = w2.wordid where w1.languageid =1 AND w2.languageid = "+i+" AND "+word+".wordtypeid = 13 ", conn.db);
@@ -451,6 +461,10 @@ void Woerterbuch::showSubFem(){
     ui->tableView->resizeColumnsToContents();
 
 }
+
+/**
+ * @brief shows all nouns with the gender neuter. either all German nouns or all nouns of the foreign language
+ */
 void Woerterbuch::showSubNeu(){
     QString i = "2";
     QString word = "w1";
@@ -465,7 +479,6 @@ void Woerterbuch::showSubNeu(){
         word = "w2";
     }
 
-
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query("select w1.word as wordid1, w2.word as wordid2, box from vocable as v left join word as w1 on v.wordid1 = w1.wordid "
                          "left join word as w2 on v.wordid2 = w2.wordid where w1.languageid =1 AND w2.languageid = "+i+" AND "+word+".wordtypeid = 15 ", conn.db);
@@ -476,6 +489,9 @@ void Woerterbuch::showSubNeu(){
 
 }
 
+/**
+ * @brief shows all numbers words. either all German number words or all number words of the foreign language
+ */
 void Woerterbuch::showZahlenwoerter(){
     QString i = "2";
     QString word = "w1";
@@ -489,7 +505,6 @@ void Woerterbuch::showZahlenwoerter(){
     if(ui->radioButton_Fremdsprache->isChecked()){
         word = "w2";
     }
-
 
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query("select w1.word as wordid1, w2.word as wordid2, box from vocable as v left join word as w1 on v.wordid1 = w1.wordid "

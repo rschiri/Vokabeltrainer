@@ -1,6 +1,7 @@
 #ifndef ADDVOCABLE_H
 #define ADDVOCABLE_H
 
+#include <QWidget>
 #include <QDialog>
 namespace Ui {
 class addVocable;
