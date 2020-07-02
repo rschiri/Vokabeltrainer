@@ -1,5 +1,6 @@
 /**
-*@author: Christin, Rebecca
+*@author: Rebecca : updateQuizVocable()
+*@author: Christin : Rest
 */
 
 #include "databasequery.h"
