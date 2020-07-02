@@ -31,6 +31,8 @@ public:
 
     int addWord(DatabaseConnection &dbc, const QString &statement,QString wordtype,QString language);
     void addVocable(DatabaseConnection &dbc, int wordid1,int wordid2, QString category);
+    
+    void updateQuizVocable(DatabaseConnection &dbc, QString box, QString counter, QString used, QString usedright, QString wordId1, QString wordId2);
 
 };
 
