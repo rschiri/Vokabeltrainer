@@ -19,6 +19,7 @@ bool DatabaseConnection::openConnection() {
     db.setDatabaseName("postgres");
     db.setUserName("postgres");
     db.setPassword("Postgres123.");
+    bool success = db.open();
     return success;
 
 
