@@ -1,3 +1,7 @@
+/**
+*@author: Christin, Lea, Rebecca
+*/
+
 #include "mainwindow.h"
 #include <QApplication>
 
