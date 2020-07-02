@@ -1,6 +1,9 @@
+/**
+*@author: Christin, Rebecca, Lea
+*/
+
 #include "databaseconnection.h"
 #include <QFile>
-#include <QDebug>
 #include <QTextStream>
 #include <QSqlError>
 
@@ -16,7 +19,6 @@ bool DatabaseConnection::openConnection() {
     db.setDatabaseName("postgres");
     db.setUserName("postgres");
     db.setPassword("Postgres123.");
-    bool success = db.open();
     qDebug()<<"Database connection established: "<<success;
     return success;
 
