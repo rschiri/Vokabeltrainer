@@ -48,16 +48,16 @@ void AddVocable::on_hinzufuegenButton_clicked()
     // put together the statement of the German words
     QString stringGermanWords = ui->germanMeaning1LineEdit->text();
     if(!stringGermanWords.isEmpty() && !ui->germanMeaning2LineEdit->text().isEmpty())
-        stringGermanWords =+ "," + ui->germanMeaning2LineEdit->text();
+        stringGermanWords =stringGermanWords+ "," + ui->germanMeaning2LineEdit->text();
     if(!stringGermanWords.isEmpty() && !ui->germanMeaning3LineEdit->text().isEmpty())
-        stringGermanWords =+ "," + ui->germanMeaning3LineEdit->text();
+        stringGermanWords =stringGermanWords+ "," + ui->germanMeaning3LineEdit->text();
 
     //put together the statement of the foreign language words
     QString stringLanguageWords = ui->languageMeaning1LineEdit->text();
     if(!stringLanguageWords.isEmpty() && !ui->languageMeaning2LineEdit->text().isEmpty())
-        stringLanguageWords =+ "," + ui->languageMeaning2LineEdit->text();
+        stringLanguageWords =stringLanguageWords+ "," + ui->languageMeaning2LineEdit->text();
     if(!stringLanguageWords.isEmpty() && !ui->languageMeaning3LineEdit->text().isEmpty())
-        stringLanguageWords =+ "," + ui->languageMeaning3LineEdit->text();
+        stringLanguageWords =stringLanguageWords+ "," + ui->languageMeaning3LineEdit->text();
 
     //checking the entries
     if(!stringGermanWords.isEmpty() && !stringLanguageWords.isEmpty()){
