@@ -1,3 +1,7 @@
+/**
+*@author: Christin
+*/
+
 #include "addvocable.h"
 #include "ui_addvocable.h"
 
