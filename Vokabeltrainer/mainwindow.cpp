@@ -197,30 +197,23 @@ void MainWindow::on_buttonTestVocabulary_clicked()
         QString comboSourceLanguage = ui->comboBoxSourceLanguage->currentText();
         QString comboDestinationLanguage = ui->comboBoxDestinationLanguage->currentText();
 
-        // get categoryid for query 
-        QSqlQuery queryCategory;
-        queryCategory.exec("select categoryid from category where category = '" + comboCategory + "'");
-        queryCategory.next();
-        QString categoryid = queryCategory.value(0).toString();
+        Databasequery dbq;
+
+        // get categoryid for query
+        int categoryIdAsInt = dbq.getIDCategory(conn, comboCategory);
+        QString categoryid = categoryid.number(categoryIdAsInt);
 
         // get wordtypeid for query
-        QSqlQuery queryWordtpye;
-        queryWordtpye.exec("select wordtypeid from wordtype where wordtype = '" + comboWordtype + "'");
-        queryWordtpye.next();
-        QString wordtypeid = queryWordtpye.value(0).toString();
+        int worddtypeIdAsInt = dbq.getIDWordtype(conn, comboWordtype);
+        QString wordtypeid = wordtypeid.number(worddtypeIdAsInt);
 
         // get languagesid of sourceLanguage for query 
-        QSqlQuery querySourceLanguageId;
-        querySourceLanguageId.exec("select languagesid from languages where language = '" + comboSourceLanguage + "'");
-        querySourceLanguageId.next();
-        QString sourceLanguageId = querySourceLanguageId.value(0).toString();
+        int sourceLanugageIdAsInt = dbq.getIDLanguage(conn, comboSourceLanguage);
+        QString sourceLanguageId = sourceLanguageId.number(sourceLanugageIdAsInt);
 
         // get languagesid of destinationLanguage for query 
-        QSqlQuery queryDestinationLanguageId;
-        queryDestinationLanguageId.exec("select languagesid from languages where language = '" + comboDestinationLanguage + "'");
-        queryDestinationLanguageId.next();
-        QString destinationLanguageId = queryDestinationLanguageId.value(0).toString();
-
+        int destinationLanguageIdAsInt = dbq.getIDLanguage(conn, comboDestinationLanguage);
+        QString destinationLanguageId = destinationLanguageId.number(destinationLanguageIdAsInt);
 
 
         QSqlQuery query;
