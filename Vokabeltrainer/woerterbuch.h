@@ -1,3 +1,7 @@
+/**
+*@author: Lea
+*/
+
 #ifndef WOERTERBUCH_H
 #define WOERTERBUCH_H
 
