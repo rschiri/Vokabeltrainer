@@ -1,5 +1,6 @@
 /**
-*@author: Christin, Rebecca
+*@author Christin : on_actionKategorie_triggered();on_actionSprache_triggered();on_actionWortart_triggered()
+*@author Rebecca : Rest
 */
 
 #include "mainwindow.h"
