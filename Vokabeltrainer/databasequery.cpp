@@ -1,3 +1,7 @@
+/**
+*@author: Christin
+*/
+
 #include "databasequery.h"
 #include "databaseconnection.h"
 #include <QTextStream>
