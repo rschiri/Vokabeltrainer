@@ -76,8 +76,8 @@ void MainWindow::on_actionKategorie_triggered()
     if(ok && !text.isEmpty() && !dbq.checkCategory(dbc,text)){
         dbq.addCategory(dbc,text);
         QMessageBox::information(this,"Information", "Kategorie wurde hinzugefügt.");
-    }else{
-        QMessageBox::information(this,"Information", "Kategorie existiert bereits.");
+    }else if(ok && (text.isEmpty() || dbq.checkCategory(dbc,text))){
+        QMessageBox::information(this,"Information", "Kategorie existiert bereits oder es wurde nichts in das Textfeld geschrieben.");
     }
     dbc.closeConnection();
 }
@@ -95,8 +95,8 @@ void MainWindow::on_actionSprache_triggered()
     if(ok && !text.isEmpty() && !dbq.checkLanguage(dbc,text)){
         dbq.addLanguage(dbc,text);
         QMessageBox::information(this,"Information", "Sprache wurde hinzugefügt.");
-    }else{
-        QMessageBox::information(this,"Information", "Sprache existiert bereits.");
+    }else if (ok && (text.isEmpty() || dbq.checkLanguage(dbc,text))){
+        QMessageBox::information(this,"Information", "Sprache existiert bereits oder es wurde nichts in das Textfeld geschrieben.");
     }
     dbc.closeConnection();
 }
@@ -114,8 +114,8 @@ void MainWindow::on_actionWortart_triggered()
     if(ok && !text.isEmpty() && !dbq.checkWordtype(dbc,text)){
         dbq.addWordtype(dbc,text);
         QMessageBox::information(this,"Information", "Wortart wurde hinzugefügt.");
-    }else{
-        QMessageBox::information(this,"Information", "Wortart existiert bereits.");
+    }else if (ok && (text.isEmpty() || dbq.checkWordtype(dbc,text))){
+        QMessageBox::information(this,"Information", "Wortart existiert bereits oder es wurde nichts in das Textfeld geschrieben.");
     }
     dbc.closeConnection();
 }
