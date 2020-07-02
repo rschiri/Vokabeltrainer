@@ -19,7 +19,6 @@ bool DatabaseConnection::openConnection() {
     db.setDatabaseName("postgres");
     db.setUserName("postgres");
     db.setPassword("Postgres123.");
-    qDebug()<<"Database connection established: "<<success;
     return success;
 
 
