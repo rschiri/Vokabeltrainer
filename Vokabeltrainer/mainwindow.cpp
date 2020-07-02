@@ -1,5 +1,6 @@
 /**
 *@author Christin : on_actionKategorie_triggered();on_actionSprache_triggered();on_actionWortart_triggered()
+*@autor Lea : mockup und initialer Entwurf
 *@author Rebecca : Rest
 */
 
