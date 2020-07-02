@@ -1,3 +1,7 @@
+/**
+*@author: Lea
+*/
+
 #include "woerterbuch.h"
 #include "ui_woerterbuch.h"
 #include "databaseconnection.h"
