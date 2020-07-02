@@ -357,12 +357,10 @@ void MainWindow::on_buttonCompare_clicked(){
 
 
     DatabaseConnection conn;
-
-    if(conn.openConnection()){
-        QSqlQuery query;
-        query.exec("update vocable set box= '" + updatebox + "', counter = '" + updatecounter + "', used = '" + updateused + "', usedright = '" + updateusedright + "' where wordid1 = '" + updatewordVocableId1 +  "' and wordid2 = '" + updatewordVocableId2 + "'");
-        conn.closeConnection();
-    }
+    Databasequery dbq;
+    conn.openConnection();
+    dbq.updateQuizVocable(conn, updatebox, updatecounter, updateused, updateusedright, updatewordVocableId1, updatewordVocableId2);
+    conn.closeConnection();
 
 }
 
